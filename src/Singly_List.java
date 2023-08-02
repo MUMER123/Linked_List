@@ -1,3 +1,6 @@
+import java.sql.Array;
+import java.util.Arrays;
+
 public class Singly_List {
     private Node head;
     public Singly_List(){
@@ -77,6 +80,35 @@ public class Singly_List {
         if(p==null){
             System.out.println("Not Found");
         }
+    }
+    public void insertAtBeg(int data){
+        Node newNode = new Node(data);
+        newNode.setNext(head);
+        head = newNode;
+    }
+    public void deleteFromBeg(){
+        this.head = head.getNext();
+    }
+    public void reverse(){
+        Singly_List l1 = new Singly_List();
+        while(head!=null){
+            l1.insertAtBeg(this.head.getData());
+            deleteFromBeg();
+        }
+        this.head = l1.head;
+    }
+    public void sort(){
+        int[] arr = new int[length()];
+        for(int i=0;i<arr.length;i++){
+            arr[i] = head.getData();
+            deleteFromBeg();
+        }
+
+        Arrays.sort(arr);
+        for(int i=arr.length-1;i>=0;i--){
+            insertAtBeg(arr[i]);
+        }
+        traversal();
     }
 
 }
